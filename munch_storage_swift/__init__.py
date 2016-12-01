@@ -1,3 +1,8 @@
+from .__about__ import (
+    __author__, __copyright__, __email__, __license__, __summary__, __title__,
+    __uri__, __version__
+)
+
 import hashlib
 import string
 import magic
@@ -9,8 +14,12 @@ from swiftclient.exceptions import ClientException
 from django.conf import settings
 from django.utils.deconstruct import deconstructible
 
-__version__ = '0.1.0'
 default_app_config = 'munch_storage_swift.apps.StorageApp'
+
+__all__ = [
+    "__title__", "__summary__", "__uri__", "__version__", "__author__",
+    "__email__", "__license__", "__copyright__",
+]
 
 
 class SwiftStorageException(Exception):

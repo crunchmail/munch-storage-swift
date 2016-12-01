@@ -1,19 +1,17 @@
+#!/usr/bin/env python3
 import os
-import re
 
 from setuptools import setup
 from setuptools import find_packages
 
-with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
-    README = readme.read()
+base_dir = os.path.dirname(__file__)
 
-with open('munch_storage_swift/__init__.py', 'r') as fd:
-    version = re.search(
-        r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]',
-        fd.read(), re.MULTILINE).group(1)
+about = {}
+with open(os.path.join(base_dir, "munch_storage_swift", "__about__.py")) as f:
+    exec(f.read(), about)
 
-if not version:
-    raise RuntimeError('Cannot find version information')
+with open(os.path.join(base_dir, "README.rst")) as f:
+    long_description = f.read()
 
 
 def _find_packages(name):
@@ -24,14 +22,14 @@ install_requires = [
 ]
 
 setup(
-    name='munch-storage-swift',
-    version=version,
-    description='Swift storage backends for Munch',
-    long_description=README,
-    url='https://github/crunchmail/munch-storage-swift',
-    author='Oasiswork',
-    author_email='dev@oasiswork.fr',
-    license='Proprietary License',
+    name=about["__title__"],
+    version=about["__version__"],
+    description=about["__summary__"],
+    long_description=long_description,
+    url=about["__uri__"],
+    author=about["__author__"],
+    author_email=about["__email__"],
+    license=about["__license__"],
     packages=_find_packages('munch_storage_swift'),
     install_requires=install_requires,
     extras_require={
@@ -47,6 +45,6 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
-        'License :: Other/Proprietary License',
+        'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',  # noqa
     ],
 )
