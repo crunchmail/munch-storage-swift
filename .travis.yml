@@ -1,0 +1,19 @@
+language: python
+python:
+  - '3.4'
+before_install:
+  - export PYTHONUSERBASE=/cache
+  - export PYTHONPATH=/cache/lib/python3.4/site-packages:$PYTHONPATH
+  - export PATH=/cache/bin:$PATH
+install: pip install --process-dependency-links -e .[tests]
+script: flake8
+deploy:
+  provider: pypi
+  user: oasiswork-devs
+  password:
+    secure: "og5oLSREQFNhHP6GFa8eVlr1u/hhnYzGI2c9ar6coFjgy//CxyxZPFYBRtjR3H1h8VPdUsmh2+Ql1pA7PK/DDTV/n47HsVIU20vCfyv7re4nZ0QdplnzYJ80Ih+NtfafKrQn9LkmUKrKeudpiaeVhuh8aG3j/j1LnOAtmZNPC2L+0Ta+f0jFMTx9sLZelgOsf1CGZgiaxijLlVCUi7R/vhOf0gw3ywZpNQzOSp0mWRb5IBAUoTkal8iRchhi3lWY68fbWse+8ns7IVWeM5mExN3rc157xSsT47XUEYYp5aNgJALvKegbtax5qcvaj/r6RX64RC0HGR9nQh3JfvDluZAeX/mLFm1mIo9dIYatNGB6eAJrmj8xK2tiKJxjT3lEqzVUNk31VrhzNME+uAIzkirqvYOLQ8qJC75fuse6JbTFznrmLXusLwKcg26VKwAzkItf1kt/HIeM3KN7lhCoR1pSt5HkqyxCG/bpNrEJIspJKQSF6G0o8HDae+P3RRZGiExECQQJBt89k0SinqiUXXvCifUKsQ3qOWXfozjJSg5wkiD7q93xBxwUB7Llkr2xsiITd6k23gb0efkPIgoWxDXOcV6Js/3BnA0P1aeUdlqgeBUbmQd3eA3CPFqVH7QratTG6bHXIz7MPhMuSADP35LixyCGnUy/bRtZTLV6vvY="
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: crunchmail/munch-storage-swift
+    branch: master
